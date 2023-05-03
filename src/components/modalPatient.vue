@@ -19,21 +19,32 @@
         >
           <el-col :span="24">
             <el-form-item label="Digite seu nome" prop="patientName">
-              <el-input v-model="form.patientName"></el-input>
+              <el-input
+                v-model="form.patientName"
+                placeholder="nome do paciente"
+                autofocus
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="24">
             <el-form-item label="Digite o nome da mãe" prop="motherName">
-              <el-input v-model="form.motherName"></el-input>
+              <el-input
+                v-model="form.motherName"
+                placeholder="nome da mae"
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item
+              placeholder="cpf"
               label="Digite seu Cpf"
               style="position: relative"
               prop="cpf"
             >
-              <el-input v-model="form.cpf"></el-input>
+              <el-input
+                v-model="form.cpf"
+                placeholder="digite o cep"
+              ></el-input>
               <p v-if="validateCep" style="position: absolute; color: red">
                 Cep inválido!
               </p>
@@ -41,7 +52,10 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="Digite seu Cns" prop="cns">
-              <el-input v-model="form.cns"></el-input>
+              <el-input
+                v-model="form.cns"
+                placeholder="digite seu cns"
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
@@ -59,6 +73,7 @@
           <el-col :span="8">
             <el-form-item label="Digite seu cep" prop="cep">
               <el-input
+                placeholder="digite seu cep"
                 v-model="form.cep"
                 @input="onCepInput"
                 prop="cep"
@@ -67,22 +82,31 @@
           </el-col>
           <el-col :span="8">
             <el-form-item label="Estado" prop="">
-              <el-input v-model="form.uf"></el-input>
+              <el-input v-model="form.uf" placeholder="Estado"></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="Cidade" prop="city">
-              <el-input v-model="form.city"></el-input>
+              <el-input
+                v-model="form.city"
+                placeholder="digite a cidade"
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="8">
             <el-form-item label="Bairro" prop="bairro">
-              <el-input v-model="form.bairro"></el-input>
+              <el-input
+                v-model="form.bairro"
+                placeholder="digite seu bairro"
+              ></el-input>
             </el-form-item>
           </el-col>
           <el-col :span="16">
             <el-form-item label="Rua" prop="logradouro">
-              <el-input v-model="form.logradouro"></el-input>
+              <el-input
+                v-model="form.logradouro"
+                placeholder="digite sua rua"
+              ></el-input>
             </el-form-item>
           </el-col>
         </el-form>
@@ -223,7 +247,7 @@ export default {
           }
 
           this.isLoading = true;
-          const result = await api.post("patients/", {
+          const result = await api.post("patients", {
             patientName,
             motherName,
             date_birth,
@@ -255,19 +279,9 @@ export default {
   },
   watch: {
     handleModal: function (modalStatus) {
-      if (modalStatus && !this.openNew) {
-        this.resetForm("form");
-        this.loadPatiensEdit();
-
-        if (this.form.cep) {
-          this.getAddressCep(this.form.cep);
-        }
-      }
-    },
-    openNew: function (status) {
-      if (status) {
-        (this.idPatient = ""),
-          (this.form.patientName = ""),
+      if (!modalStatus) {
+        this.idPatient = "";
+        (this.form.patientName = ""),
           (this.form.motherName = ""),
           (this.form.date_birth = ""),
           (this.form.cpf = ""),
@@ -277,6 +291,21 @@ export default {
           (this.form.city = ""),
           (this.form.logradouro = ""),
           (this.form.bairro = "");
+      }
+
+      if (modalStatus && !this.openNew) {
+        this.resetForm("form");
+        this.loadPatiensEdit();
+
+        if (this.form.cep) {
+          this.getAddressCep(this.form.cep);
+        }
+      }
+    },
+
+    openNew: function (status) {
+      if (status) {
+        this.idPatient = "";
       }
     },
   },

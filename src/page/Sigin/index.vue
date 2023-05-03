@@ -15,7 +15,7 @@
           >Digite o seu nome</span
         >
         <el-input
-          placeholder="Please input"
+          placeholder="digite seu nome aqui"
           class="input-right"
           v-model="name"
           @input="nameInput"
