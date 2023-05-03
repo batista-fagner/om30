@@ -30,6 +30,10 @@ yarn
 yarn run serve
 ```
 
+## Para executar o server mockado
+- navegar até a pasta db.json que se econtra em src/db
+- executar o comando: json-server --watch db.json
+
 ## Pontos para melhorar no código:
 - Ao clicar em remover um paciente abrir uma modal de confirmação questionando ao usuário se tem certeza que deseja remover o paciente
 - Inserir a possibilidade do usuário adcionar a foto do paciente bem como edita-la. A foto que existe hoje esta fixa no código.
