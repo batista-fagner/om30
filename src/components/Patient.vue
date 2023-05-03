@@ -72,7 +72,6 @@ export default {
     async loadPatient() {
       const resLoadPatient = await api.get('/patients');
       if (resLoadPatient.status === 200) {
-        console.log(resLoadPatient.data);
 
         const newTableDateFormated = resLoadPatient.data.map((element) => {
           const data = moment(element.date_birth);
@@ -102,7 +101,6 @@ export default {
     },
 
     handleDelete(index, row) {
-      console.log('remover')
       this.removePatient(row.id);
     },
 
