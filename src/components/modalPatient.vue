@@ -234,6 +234,15 @@ export default {
               bairro,
               logradouro,
             });
+            if ([401, 404, 400, 500].includes(resultEdit.status)) {
+              this.$notify({
+                title: "Error",
+                message: "Não foi possível editar o Patiente",
+                type: "error",
+              });
+              return;
+            }
+
             if (resultEdit.status === 200) {
               this.$notify({
                 title: "Success",
@@ -260,6 +269,15 @@ export default {
             logradouro,
           });
 
+          if ([401, 404, 400, 500].includes(result.status)) {
+            this.$notify({
+              title: "Error",
+              message: "Não foi possível adicionar o Patiente",
+              type: "error",
+            });
+            return;
+          }
+
           if (result.status === 201) {
             this.isLoading = false;
             this.$notify({
@@ -281,6 +299,7 @@ export default {
     handleModal: function (modalStatus) {
       if (!modalStatus) {
         this.idPatient = "";
+        this.resetForm("form");
         (this.form.patientName = ""),
           (this.form.motherName = ""),
           (this.form.date_birth = ""),
