@@ -1,8 +1,18 @@
-import Vue from 'vue'
-import App from './App.vue'
+import App from "./App.vue";
+import Vue from "vue";
+import ElementUI from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
+import VueRouter from "vue-router";
+import locale from "element-ui/lib/locale/lang/pt";
 
-Vue.config.productionTip = false
+import router from "./routers";
+
+Vue.config.productionTip = false;
+
+Vue.use(ElementUI, { locale });
+Vue.use(VueRouter);
 
 new Vue({
-  render: h => h(App),
-}).$mount('#app')
+  router,
+  render: (h) => h(App),
+}).$mount("#app");
