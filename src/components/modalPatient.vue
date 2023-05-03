@@ -33,7 +33,7 @@
               style="position: relative"
               prop="cpf"
             >
-              <el-input v-model="form.cpf" @input="onCpfInput"></el-input>
+              <el-input v-model="form.cpf"></el-input>
               <p v-if="validateCep" style="position: absolute; color: red">
                 Cep inválido!
               </p>
@@ -105,7 +105,6 @@
 import axios from "axios";
 import { api } from "../service/api";
 import { validatePatient } from "../utils/validateRules";
-import { validaCPF } from "../utils/validateCpf";
 import moment from "moment";
 export default {
   name: "ModalPatient",
@@ -168,23 +167,12 @@ export default {
       const { cep } = this.form;
 
       if (cep.length === 8) {
-        console.log(cep);
         this.getAddressCep(cep);
       }
     },
 
     resetForm(formName) {
       this.$refs[formName]?.resetFields();
-    },
-
-    onCpfInput() {
-      const result = validaCPF(this.form.cpf);
-      if (result) {
-        console.log("errado");
-      } else {
-        this.validateCep = false;
-        // alert('errado')
-      }
     },
 
     async submitForm(formNames) {
@@ -277,7 +265,6 @@ export default {
       }
     },
     openNew: function (status) {
-      console.log("sta", status);
       if (status) {
         (this.idPatient = ""),
           (this.form.patientName = ""),
